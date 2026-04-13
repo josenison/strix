@@ -303,15 +303,13 @@ def test_get_total_llm_stats_includes_completed_subagents(monkeypatch, tmp_path)
     )
     monkeypatch.setattr(
         agents_graph_actions,
-        "_completed_agent_llm_stats",
+        "_completed_agent_llm_totals",
         {
-            "sub-agent-1": {
-                "input_tokens": 2_000,
-                "output_tokens": 500,
-                "cached_tokens": 400,
-                "cost": 0.54321,
-                "requests": 3,
-            }
+            "input_tokens": 2_000,
+            "output_tokens": 500,
+            "cached_tokens": 400,
+            "cost": 0.54321,
+            "requests": 3,
         },
     )
 
