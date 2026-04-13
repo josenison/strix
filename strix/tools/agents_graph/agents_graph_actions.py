@@ -19,7 +19,34 @@ _running_agents: dict[str, threading.Thread] = {}
 
 _agent_instances: dict[str, Any] = {}
 
+_completed_agent_llm_stats: dict[str, dict[str, int | float]] = {}
+
 _agent_states: dict[str, Any] = {}
+
+
+def _snapshot_agent_llm_stats(agent: Any) -> dict[str, int | float] | None:
+    if not hasattr(agent, "llm") or not hasattr(agent.llm, "_total_stats"):
+        return None
+
+    stats = agent.llm._total_stats
+    return {
+        "input_tokens": stats.input_tokens,
+        "output_tokens": stats.output_tokens,
+        "cached_tokens": stats.cached_tokens,
+        "cost": stats.cost,
+        "requests": stats.requests,
+    }
+
+
+def _persist_completed_agent_llm_stats(agent_id: str, agent: Any) -> None:
+    stats = _snapshot_agent_llm_stats(agent)
+    if stats is None:
+        return
+
+    _completed_agent_llm_stats[agent_id] = stats
+    node = _agent_graph["nodes"].get(agent_id)
+    if node is not None:
+        node["llm_stats"] = stats
 
 
 def _is_whitebox_agent(agent_id: str) -> bool:
@@ -237,6 +264,7 @@ def _run_agent_in_thread(
         _agent_graph["nodes"][state.agent_id]["finished_at"] = datetime.now(UTC).isoformat()
         _agent_graph["nodes"][state.agent_id]["result"] = {"error": str(e)}
         _running_agents.pop(state.agent_id, None)
+        _persist_completed_agent_llm_stats(state.agent_id, agent)
         _agent_instances.pop(state.agent_id, None)
         raise
     else:
@@ -247,6 +275,7 @@ def _run_agent_in_thread(
         _agent_graph["nodes"][state.agent_id]["finished_at"] = datetime.now(UTC).isoformat()
         _agent_graph["nodes"][state.agent_id]["result"] = result
         _running_agents.pop(state.agent_id, None)
+        _persist_completed_agent_llm_stats(state.agent_id, agent)
         _agent_instances.pop(state.agent_id, None)
 
         return {"result": result}

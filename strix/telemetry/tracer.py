@@ -799,7 +799,10 @@ class Tracer:
         )
 
     def get_total_llm_stats(self) -> dict[str, Any]:
-        from strix.tools.agents_graph.agents_graph_actions import _agent_instances
+        from strix.tools.agents_graph.agents_graph_actions import (
+            _agent_instances,
+            _completed_agent_llm_stats,
+        )
 
         total_stats = {
             "input_tokens": 0,
@@ -808,6 +811,15 @@ class Tracer:
             "cost": 0.0,
             "requests": 0,
         }
+
+        for agent_id, completed_stats in _completed_agent_llm_stats.items():
+            if agent_id in _agent_instances:
+                continue
+            total_stats["input_tokens"] += int(completed_stats.get("input_tokens", 0) or 0)
+            total_stats["output_tokens"] += int(completed_stats.get("output_tokens", 0) or 0)
+            total_stats["cached_tokens"] += int(completed_stats.get("cached_tokens", 0) or 0)
+            total_stats["cost"] += float(completed_stats.get("cost", 0.0) or 0.0)
+            total_stats["requests"] += int(completed_stats.get("requests", 0) or 0)
 
         for agent_instance in _agent_instances.values():
             if hasattr(agent_instance, "llm") and hasattr(agent_instance.llm, "_total_stats"):
