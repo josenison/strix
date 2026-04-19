@@ -41,7 +41,7 @@ Thank you for your interest in contributing to Strix! This guide will help you g
    uv run strix --target https://example.com
    ```
 
-   > **Personal note:** I usually add `--verbose` during dev so I can see what the agent is actually doing step by step. Helps a lot when debugging skill outputs.
+   > **Personal note:** I usually add `--verbose` during dev so I can see what the agent is actually doing step by step. Helps a lot when debugging skill outputs. Also `--dry-run` is useful when testing new skills to avoid actually sending requests.
 
 ## 📚 Contributing Skills
 
@@ -105,9 +105,4 @@ We welcome feature ideas! Please:
 
 ## 🤝 Community
 
-- **Discord**: [Join our community](https://discord.gg/strix-ai)
-- **Issues**: [GitHub Issues](https://github.com/usestrix/strix/issues)
-
-## ✨ Recognition
-
-We value all contributions! Contributors wi
+- **Discord**: [Join our community]
