@@ -41,6 +41,8 @@ Thank you for your interest in contributing to Strix! This guide will help you g
    uv run strix --target https://example.com
    ```
 
+   > **Personal note:** I usually add `--verbose` during dev so I can see what the agent is actually doing step by step. Helps a lot when debugging skill outputs.
+
 ## 📚 Contributing Skills
 
 Skills are specialized knowledge packages that enhance agent capabilities. See [strix/skills/README.md](strix/skills/README.md) for detailed guidelines.
@@ -108,11 +110,4 @@ We welcome feature ideas! Please:
 
 ## ✨ Recognition
 
-We value all contributions! Contributors will be:
-- Listed in release notes
-- Thanked in our Discord
-- Added to contributors list (coming soon)
-
----
-
-**Questions?** Reach out on [Discord](https://discord.gg/strix-ai)
+We value all contributions! Contributors wi
