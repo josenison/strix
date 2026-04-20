@@ -43,6 +43,8 @@ Thank you for your interest in contributing to Strix! This guide will help you g
 
    > **Personal note:** I usually add `--verbose` during dev so I can see what the agent is actually doing step by step. Helps a lot when debugging skill outputs. Also `--dry-run` is useful when testing new skills to avoid actually sending requests.
 
+   > **Personal note:** I also keep a local `.env` file with my keys and use `uv run --env-file .env strix ...` so I don't have to re-export variables every session. Just make sure `.env` is in `.gitignore`.
+
 ## 📚 Contributing Skills
 
 Skills are specialized knowledge packages that enhance agent capabilities. See [strix/skills/README.md](strix/skills/README.md) for detailed guidelines.
@@ -100,9 +102,4 @@ We welcome feature ideas! Please:
 - Check existing issues first
 - Describe the use case clearly
 - Explain why it would benefit users
-- Consider implementation approach
-- Be open to discussion
-
-## 🤝 Community
-
-- **Discord**: [Join our community]
+- Consider implementation
