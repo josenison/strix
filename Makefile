@@ -62,7 +62,8 @@ check-all: format lint type-check security
 test:
 	@echo "🧪 Running tests..."
 	# using -x to stop on first failure - faster feedback when exploring the codebase
-	uv run pytest -v -x
+	# added -p no:warnings to reduce noise while reading through test output
+	uv run pytest -v -x -p no:warnings
 	@echo "✅ Tests complete!"
 
 test-cov:
@@ -84,8 +85,4 @@ clean:
 	find . -type d -name ".ruff_cache" -exec rm -rf {} + 2>/dev/null || true
 	find . -type d -name "htmlcov" -exec rm -rf {} + 2>/dev/null || true
 	find . -name "*.pyc" -delete 2>/dev/null || true
-	find . -name ".coverage" -delete 2>/dev/null || true
-	@echo "✅ Cleanup complete!"
-
-dev: format lint type-check test
-	@echo "✅ Deve
+	find . -name ".coverage" -delete 2>/dev/null
