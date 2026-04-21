@@ -47,6 +47,8 @@ Thank you for your interest in contributing to Strix! This guide will help you g
 
    > **Personal note:** For quick repeated runs against a local test app I spun up a minimal Flask target in `dev/test_target/` — saves me from hammering example.com. Run it with `uv run python dev/test_target/app.py` before invoking strix.
 
+   > **Personal note:** If Docker isn't running you'll get a cryptic error early on — worth adding `docker info > /dev/null 2>&1 || (echo "Docker not running" && exit 1)` as a sanity check alias before invoking strix in dev.
+
 ## 📚 Contributing Skills
 
 Skills are specialized knowledge packages that enhance agent capabilities. See [strix/skills/README.md](strix/skills/README.md) for detailed guidelines.
@@ -82,17 +84,4 @@ Skills are specialized knowledge packages that enhance agent capabilities. See [
 
 - Follow PEP 8 with 100-character line limit
 - Use type hints for all functions
-- Write docstrings for public methods
-- Keep functions focused and small
-- Use meaningful variable names
-
-## 🐛 Reporting Issues
-
-When reporting bugs, please include:
-
-- Python version and OS
-- Strix version
-- LLMs being used
-- Full error traceback
-- Steps to reproduce
-- E
+- Write docstrings for public 
