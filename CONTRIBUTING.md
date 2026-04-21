@@ -45,6 +45,8 @@ Thank you for your interest in contributing to Strix! This guide will help you g
 
    > **Personal note:** I also keep a local `.env` file with my keys and use `uv run --env-file .env strix ...` so I don't have to re-export variables every session. Just make sure `.env` is in `.gitignore`.
 
+   > **Personal note:** For quick repeated runs against a local test app I spun up a minimal Flask target in `dev/test_target/` — saves me from hammering example.com. Run it with `uv run python dev/test_target/app.py` before invoking strix.
+
 ## 📚 Contributing Skills
 
 Skills are specialized knowledge packages that enhance agent capabilities. See [strix/skills/README.md](strix/skills/README.md) for detailed guidelines.
@@ -93,13 +95,4 @@ When reporting bugs, please include:
 - LLMs being used
 - Full error traceback
 - Steps to reproduce
-- Expected vs actual behavior
-
-## 💡 Feature Requests
-
-We welcome feature ideas! Please:
-
-- Check existing issues first
-- Describe the use case clearly
-- Explain why it would benefit users
-- Consider implementation
+- E
